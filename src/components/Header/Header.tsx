@@ -13,7 +13,7 @@ const Header = ({ heroInfo = false }: HeaderProps) => {
 
   useEffect(() => {
     isHero(location.pathname)
-  }, [location])
+  }, [location, heroInfo])
 
   const isHero = (path: any) => {
     const str = path

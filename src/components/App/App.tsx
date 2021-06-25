@@ -1,4 +1,6 @@
-import React from 'react'
+import { Provider } from 'react-redux'
+import configureStore from 'store/config'
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import { Home, Hero } from 'pages'
@@ -9,21 +11,24 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyles from 'styles/global'
 import theme from 'styles/theme'
 
+export const store = configureStore()
+
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Router>
-        <GlobalStyles />
-        <div className="container">
-          <Header />
-          <h1>Marvel Ifood</h1>
-          <Switch>
-            <Route exact path={'/'} component={Home} />
-            <Route path={'/hero/:id'} component={Hero} />
-          </Switch>
-        </div>
-      </Router>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <GlobalStyles />
+          <div className="container">
+            <Header />
+            <Switch>
+              <Route exact path={'/'} component={Home} />
+              <Route path={'/hero/:id'} component={Hero} />
+            </Switch>
+          </div>
+        </Router>
+      </ThemeProvider>
+    </Provider>
   )
 }
 

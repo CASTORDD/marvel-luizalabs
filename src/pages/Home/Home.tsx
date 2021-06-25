@@ -1,7 +1,17 @@
-import React from 'react'
+import { connect } from 'react-redux'
 
-const Home = () => {
-  return <h2>Home</h2>
+import { HerosList } from 'components'
+
+const Home = ({ heros }: any) => {
+  return (
+    <div className="container">
+      <HerosList heros={heros} />
+    </div>
+  )
 }
 
-export default Home
+const mapStateToProps = (state: any) => ({
+  heros: state?.heros.herosList
+})
+
+export default connect(mapStateToProps, null)(Home)
