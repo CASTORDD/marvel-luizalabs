@@ -3,7 +3,7 @@
     "target": "es5",
     "lib": [
       "dom",
-      "dom.iterable",
+      "dom.iterable"
     ],
     "allowJs": true,
     "skipLibCheck": true,
@@ -17,7 +17,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "module": "esnext"
   },
   "exclude": [
     "node_modules"
