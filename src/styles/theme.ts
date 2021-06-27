@@ -34,7 +34,7 @@ export default {
     gray: '#8F8F8F',
     darkGray: '#2c4b5c',
     red: '#ea1e2b',
-    redHover: '#ea1e2b'
+    redHover: '#C10000'
   },
   spacings: {
     xxsmall: '0.8rem',

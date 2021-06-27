@@ -1,4 +1,5 @@
 import { createGlobalStyle, css } from 'styled-components'
+import media from 'styled-media-query'
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
@@ -41,6 +42,9 @@ const GlobalStyles = createGlobalStyle`
       max-width: 1240px;
       padding: ${theme.spacings.xsmall};
       margin: 0 auto;
+      ${media.lessThan('medium')`
+        padding: ${theme.spacings.xxsmall};
+      `}
     }
   `}
 

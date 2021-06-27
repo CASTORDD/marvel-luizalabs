@@ -4,10 +4,10 @@ export const baseUrl = process.env.REACT_APP_API_BASE_URL
 export const apiKey = process.env.REACT_APP_PUBLIC_KEY
 
 export const getHeros = (filterValue: I.FilterCharactersProps) => {
-  const { limit, offset, name } = filterValue
+  const { limit, offset, name, order } = filterValue
 
   return axios.get(
-    `${baseUrl}/characters?limit=${limit}${
+    `${baseUrl}/characters?orderBy=${order}&limit=${limit}${
       name ? '&name=' + name : ''
     }&offset=${offset}&apikey=${apiKey}`
   )

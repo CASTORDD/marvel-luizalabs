@@ -3,11 +3,7 @@ import { connect } from 'react-redux'
 import { HerosList } from 'components'
 
 const Home = ({ heros }: any) => {
-  return (
-    <div className="container">
-      <HerosList heros={heros} />
-    </div>
-  )
+  return <HerosList heros={heros} />
 }
 
 const mapStateToProps = (state: any) => ({

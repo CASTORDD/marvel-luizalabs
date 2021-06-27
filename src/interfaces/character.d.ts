@@ -3,6 +3,7 @@ declare namespace I {
     limit: number
     offset: number
     name?: string | null
+    order: string
   }
 
   export interface CharactersProps {
