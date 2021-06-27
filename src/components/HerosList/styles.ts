@@ -5,6 +5,7 @@ export const HerosWrapper = styled.ul`
   width: 100%;
   ${({ theme }) => css`
     list-style: none;
+    color: ${theme.colors.gray};
   `}
 `
 

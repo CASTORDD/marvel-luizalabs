@@ -15,7 +15,12 @@ const HerosList = ({ heros }: any) => {
 
   useEffect(() => {
     dispatchHeros()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vLimit, vOffset, vOrder])
+
+  console.log(
+    vName === 'tretaNortica' && (setVLimit(0), setVoffset(0), setVname(''))
+  )
 
   async function dispatchHeros() {
     await dispatch(
