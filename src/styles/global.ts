@@ -29,12 +29,14 @@ const GlobalStyles = createGlobalStyle`
   ${({ theme }) => css`
     html {
       font-size: 62.5%;
+      height: 100%;
     }
 
     body {
       color: ${theme.colors.darkGray};
       font-family: ${theme.font.family};
       font-size: ${theme.font.sizes.medium};
+      height: 100%;
     }
 
     .container {

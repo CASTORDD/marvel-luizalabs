@@ -11,6 +11,8 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyles from 'styles/global'
 import theme from 'styles/theme'
 
+import { Footer } from './styles'
+
 export const store = configureStore()
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
               <Route path={'/hero/:id'} component={Hero} />
             </Switch>
           </div>
+          <Footer />
         </Router>
       </ThemeProvider>
     </Provider>

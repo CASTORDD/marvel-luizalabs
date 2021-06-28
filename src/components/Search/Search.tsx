@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 import { getHerosL } from 'store/modules/heros/thunks'
 import { Wrapper, Input, Icon } from './styles'
 
@@ -13,7 +14,13 @@ export type SearchProps = {
 
 const Search = ({ hasHero }: SearchProps) => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const [preName, setPreName] = useState('')
+
+  const path = history.location.pathname
+  useEffect(() => {
+    if (path.indexOf('hero') !== -1) setPreName('')
+  }, [path])
 
   const handleSetName = (name: string) => {
     if (name.length <= 0) {
