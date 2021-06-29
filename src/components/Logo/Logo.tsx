@@ -9,7 +9,7 @@ export type LogoProps = {
 
 const Logo = ({ size = 'normal', hideOnMobile = true }: LogoProps) => {
   return (
-    <Wrapper size={size} hideOnMobile={hideOnMobile}>
+    <Wrapper size={size} hideOnMobile={hideOnMobile} to={'/'}>
       <Img />
       <span className="text">Search heros</span>
     </Wrapper>
