@@ -12,6 +12,7 @@ export const WrapperInfo = styled.div<{ name: string }>`
   `}
   ${({ name }) => css`
     &::after {
+      max-width: 100%;
       color: rgba(255, 255, 255, 0.8);
       content: '${name}';
       position: absolute;
@@ -22,6 +23,7 @@ export const WrapperInfo = styled.div<{ name: string }>`
       font-weight: bold;
       line-height: 0.7;
       text-transform: uppercase;
+      overflow: hidden;
 
       ${media.greaterThan('medium')`
         font-size: 30rem;

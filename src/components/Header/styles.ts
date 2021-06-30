@@ -17,9 +17,17 @@ export const Wrapper = styled.div<HeaderProps>`
   align-items: center;
 
   ${({ theme, heroInfo }) => css`
-    ${!!heroInfo && wrapperModifiers.heroInfo}
     padding: ${theme.spacings.medium} ${theme.spacings.xsmall};
-    ${media.lessThan('medium')``}
+    ${media.lessThan('medium')`
+
+      padding: ${theme.spacings.xsmall};
+      h1 {
+        font-size: ${theme.font.sizes.xxlarge}
+      }
+    `}
+    ${media.greaterThan('medium')`
+      ${!!heroInfo && wrapperModifiers.heroInfo}
+    `}
   `}
 `
 

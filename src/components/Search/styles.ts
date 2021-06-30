@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import media from 'styled-media-query'
 import { Search } from '@styled-icons/ionicons-solid/Search'
 import { SearchProps } from './Search'
 
@@ -6,12 +7,17 @@ export const Wrapper = styled.div<SearchProps>`
   ${({ theme, hasHero }) => css`
     position: relative;
     width: 100%;
-    max-width: 70%;
+    max-width: 100%;
     border-radius: ${theme.border.round};
     background-color: rgba(237, 29, 36, 0.1);
     padding: 0 ${theme.spacings.xsmall};
+    margin: ${theme.spacings.small} 0;
     ${!!hasHero && WrapperModifier.bgc}
-    ${!!hasHero && WrapperModifier.margin}
+
+    ${media.greaterThan('medium')`
+      ${!!hasHero && WrapperModifier.margin}
+      max-width: 70%;
+    `}
   `}
 `
 const WrapperModifier = {

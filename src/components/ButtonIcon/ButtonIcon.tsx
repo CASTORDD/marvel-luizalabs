@@ -27,7 +27,7 @@ const ButtonIcon = ({
     <ButtonWrapper className={className} onClick={() => onClick()}>
       <Icon>{icons[icon]}</Icon>
       {!!title && <Title>{title}</Title>}
-      {!!tip && <Tip>{tip}</Tip>}
+      {!!tip && <Tip className="tip">{tip}</Tip>}
     </ButtonWrapper>
   )
 }

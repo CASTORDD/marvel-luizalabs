@@ -17,6 +17,11 @@ export const ButtonWrapper = styled.div<{ className?: string | null }>`
           stroke: ${theme.colors.red};
         }
       }
+
+      .tip {
+        bottom: 30px;
+        opacity: 1;
+      }
     }
 
     &.active {
@@ -51,10 +56,18 @@ export const Title = styled.span`
 
 export const Tip = styled.span`
   ${({ theme }) => css`
+    color: ${theme.colors.white};
     width: 15rem;
     position: absolute;
+    bottom: 15px;
     font-size: ${theme.font.sizes.xsmall};
+    font-weight: ${theme.font.bold};
+    text-align: center;
+    padding: ${theme.spacings.xxsmall};
+    border-radius: 6px;
+    background-color: rgba(44, 75, 92, 0.9);
     opacity: 0;
+    transition: all 300ms ease-in-out;
   `}
 `
 

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { getHerosL, setListHeros } from 'store/modules/heros/thunks'
 
-import { HeroCard, ButtonIcon } from 'components'
+import { HeroCard, ButtonIcon, Sorry } from 'components'
 import { HerosWrapper, Controls, HeaderList } from './styles'
 import { Pager } from 'components'
 import { isMobile } from 'utils/IsMobile'
@@ -172,7 +172,7 @@ const HerosList = ({ heros, favoritesHeros }: any) => {
             />
           </>
         ) : (
-          <p>Nao temdados</p>
+          <Sorry title="Não tem Heroes registrados" />
         ))}
       {vFavourite && (
         <HerosWrapper>
@@ -187,6 +187,7 @@ const HerosList = ({ heros, favoritesHeros }: any) => {
               />
             )
           })}
+          <Sorry title="Não tem Heroes favoritos" />
         </HerosWrapper>
       )}
     </>

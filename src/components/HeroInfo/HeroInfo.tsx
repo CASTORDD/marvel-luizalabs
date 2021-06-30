@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { formatDate } from 'utils/Date'
 
-import { ButtonIcon, DetailList } from 'components'
+import { ButtonIcon, DetailList, Sorry } from 'components'
 import {
   WrapperInfo,
   Description,
@@ -111,7 +111,7 @@ const HeroInfo = ({ data }: any) => {
           </WrapperLists>
         </>
       ) : (
-        <p>Don have info</p>
+        <Sorry title="Não tem dados para o Hero" />
       )}
     </>
   )
