@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getHerosL } from 'store/modules/heros/thunks'
+import { getHerosL, setListHeros } from 'store/modules/heros/thunks'
 
 import { HeroCard, ButtonIcon } from 'components'
 import { HerosWrapper, Controls, HeaderList } from './styles'
@@ -8,7 +8,7 @@ import { Pager } from 'components'
 import { isMobile } from 'utils/IsMobile'
 import { getCookie, setCookie } from 'utils/Cookie'
 
-const HerosList = ({ heros }: any) => {
+const HerosList = ({ heros, favoritesHeros }: any) => {
   const dispatch = useDispatch()
   const [vLimit, setVLimit] = useState(20)
   const [vOffset, setVoffset] = useState(0)
@@ -24,6 +24,7 @@ const HerosList = ({ heros }: any) => {
   useEffect(() => {
     getCookie('favorites') === undefined && setCookie('favorites', [], {})
     dispatchHeros()
+    dispatchFavoritesHeros()
 
     if (heros && heros.total !== 0) {
       setPages(Math.ceil(heros.total / vLimit))
@@ -36,7 +37,12 @@ const HerosList = ({ heros }: any) => {
     }
     setBtnPages(pl)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, vLimit, vOffset, vOrder])
+  }, [page, vLimit, vOffset, vOrder, favorites])
+
+  useEffect(() => {
+    getFavorites()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   async function dispatchHeros() {
     await dispatch(
@@ -47,6 +53,10 @@ const HerosList = ({ heros }: any) => {
         order: vOrder ? 'name' : 'modified'
       })
     )
+  }
+
+  async function dispatchFavoritesHeros() {
+    await dispatch(setListHeros(favorites))
   }
 
   const handleOrder = () => {
@@ -88,10 +98,6 @@ const HerosList = ({ heros }: any) => {
   const handleLast = () => {
     setPage(pages)
   }
-
-  useEffect(() => {
-    getFavorites()
-  }, [])
 
   const list: any = favorites.length > 0 ? favorites : []
   const setFavorite = (heroId: number) => {
@@ -135,37 +141,53 @@ const HerosList = ({ heros }: any) => {
           />
         </Controls>
       </HeaderList>
-      {heros?.count > 0 ? (
-        <>
-          <HerosWrapper>
-            {heros.results.map((hero: any, index: any) => {
-              return (
-                <HeroCard
-                  key={index}
-                  hero={hero}
-                  setFavorite={(heroId: number) => setFavorite(heroId)}
-                  active={isActive(hero.id)}
-                  nfavorites={nfav}
-                />
-              )
-            })}
-          </HerosWrapper>
-          <Pager
-            total={heros.total}
-            page={page}
-            btnPages={btnPages}
-            limit={vLimit}
-            handlePage={handlePage}
-            handleChangeOffset={handleChangeOffset}
-            handleChangeLimit={handleChangeLimit}
-            handleFirst={handleFirst}
-            handleNext={handleNext}
-            handlePrev={handlePrev}
-            handleLast={handleLast}
-          />
-        </>
-      ) : (
-        <p>Nao temdados</p>
+      {!vFavourite &&
+        (heros?.count > 0 ? (
+          <>
+            <HerosWrapper>
+              {heros.results.map((hero: any, index: any) => {
+                return (
+                  <HeroCard
+                    key={index}
+                    hero={hero}
+                    setFavorite={(heroId: number) => setFavorite(heroId)}
+                    active={isActive(hero.id)}
+                    nfavorites={nfav}
+                  />
+                )
+              })}
+            </HerosWrapper>
+            <Pager
+              total={heros.total}
+              page={page}
+              btnPages={btnPages}
+              limit={vLimit}
+              handlePage={handlePage}
+              handleChangeOffset={handleChangeOffset}
+              handleChangeLimit={handleChangeLimit}
+              handleFirst={handleFirst}
+              handleNext={handleNext}
+              handlePrev={handlePrev}
+              handleLast={handleLast}
+            />
+          </>
+        ) : (
+          <p>Nao temdados</p>
+        ))}
+      {vFavourite && (
+        <HerosWrapper>
+          {favoritesHeros?.map((hero: any, index: any) => {
+            return (
+              <HeroCard
+                key={index}
+                hero={hero}
+                setFavorite={(heroId: number) => setFavorite(heroId)}
+                active={isActive(hero.id)}
+                nfavorites={nfav}
+              />
+            )
+          })}
+        </HerosWrapper>
       )}
     </>
   )

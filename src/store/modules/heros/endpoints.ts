@@ -16,3 +16,19 @@ export const getHeros = (filterValue: I.FilterCharactersProps) => {
 export const getHero = (id: number) => {
   return axios.get(`${baseUrl}/characters/${id}?apikey=${apiKey}`)
 }
+
+export const setFavotieHeros = (list: any) => {
+  const herosList: any = []
+  list.map((item: number) => {
+    return axios
+      .get(`${baseUrl}/characters/${item}?apikey=${apiKey}`)
+      .then(({ data }) => {
+        herosList.push(data.data.results[0])
+      })
+      .catch((err: any) => {
+        throw new Error(err)
+      })
+  })
+
+  return herosList
+}

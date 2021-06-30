@@ -31,3 +31,15 @@ export const getHero =
         throw new Error(err)
       })
   }
+
+export const setListHeros =
+  (list: any): ThunkAction<void, RootState, unknown, AnyAction> =>
+  (dispatch) => {
+    if (list?.length) {
+      const response = rest.setFavotieHeros(list)
+
+      if (response) {
+        dispatch(actions.setFavoriteHeros(response))
+      }
+    }
+  }
