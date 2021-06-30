@@ -22,7 +22,7 @@ const Header = ({ heroInfo = false }: HeaderProps) => {
 
   return (
     <Wrapper heroInfo={hasHero}>
-      <Logo size={hasHero ? 'small' : 'normal'} />
+      <Logo size={hasHero ? 'small' : 'normal'} hideonmobile={false} />
       {!hasHero && (
         <Intro>
           <h1>EXPLORE O UNIVERSO</h1>

@@ -6,6 +6,7 @@ import { HeroCard, ButtonIcon } from 'components'
 import { HerosWrapper, Controls, HeaderList } from './styles'
 import { Pager } from 'components'
 import { isMobile } from 'utils/IsMobile'
+import { getCookie, setCookie } from 'utils/Cookie'
 
 const HerosList = ({ heros }: any) => {
   const dispatch = useDispatch()
@@ -13,12 +14,15 @@ const HerosList = ({ heros }: any) => {
   const [vOffset, setVoffset] = useState(0)
   const [vOrder, serVoder] = useState(false)
   const [vFavourite, setFavourite] = useState(false)
+  const [favorites, setFavorites] = useState<any>([])
+  const [nfav, setNfav] = useState(0)
 
   const [pages, setPages] = useState(0)
   const [page, setPage] = useState(1)
   const [btnPages, setBtnPages] = useState([])
 
   useEffect(() => {
+    getCookie('favorites') === undefined && setCookie('favorites', [], {})
     dispatchHeros()
 
     if (heros && heros.total !== 0) {
@@ -85,6 +89,31 @@ const HerosList = ({ heros }: any) => {
     setPage(pages)
   }
 
+  useEffect(() => {
+    getFavorites()
+  }, [])
+
+  const list: any = favorites.length > 0 ? favorites : []
+  const setFavorite = (heroId: number) => {
+    const d = new Date(Date.now() + 60 * 60 * 24 * 3600)
+    const index = list.indexOf(heroId)
+    index === -1
+      ? (list.length < 5 && list.push(heroId),
+        setCookie('favorites', list, { expires: d }))
+      : (list.splice(index, 1), setCookie('favorites', list, { expires: d }))
+    getFavorites()
+  }
+
+  const getFavorites = () => {
+    const favoritesList = getCookie('favorites')
+    setFavorites(favoritesList)
+    setNfav(favorites.length)
+  }
+
+  const isActive = (id: any) => {
+    return favorites.includes(id) ? true : false
+  }
+
   return (
     <>
       <HeaderList>
@@ -97,7 +126,6 @@ const HerosList = ({ heros }: any) => {
             onClick={() => handleOrder()}
             tip="Ordernar os resultados pelo nome"
           />
-          {/* <span>switch</span> */}
           <ButtonIcon
             className={vFavourite ? 'active' : ''}
             icon="heart"
@@ -111,7 +139,15 @@ const HerosList = ({ heros }: any) => {
         <>
           <HerosWrapper>
             {heros.results.map((hero: any, index: any) => {
-              return <HeroCard key={index} hero={hero} />
+              return (
+                <HeroCard
+                  key={index}
+                  hero={hero}
+                  setFavorite={(heroId: number) => setFavorite(heroId)}
+                  active={isActive(hero.id)}
+                  nfavorites={nfav}
+                />
+              )
             })}
           </HerosWrapper>
           <Pager

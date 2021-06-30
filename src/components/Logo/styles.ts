@@ -18,7 +18,7 @@ const wrapperModifiers = {
       width: 15rem;
     }
   `,
-  hideOnMobile: () => css`
+  hideonmobile: () => css`
     ${media.lessThan('medium')`
       width: 10rem;
 
@@ -30,12 +30,12 @@ const wrapperModifiers = {
 }
 
 export const Wrapper = styled(Link)<LogoProps>`
-  ${({ theme, size, hideOnMobile }) => css`
+  ${({ theme, size, hideonmobile }) => css`
     width: fit-content;
     display: flex;
     text-decoration: none;
     ${!!size && wrapperModifiers[size]};
-    ${!!hideOnMobile && wrapperModifiers.hideOnMobile}
+    ${!!hideonmobile && wrapperModifiers.hideonmobile}
 
     .text {
       color: ${theme.colors.darkGray};

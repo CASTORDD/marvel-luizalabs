@@ -4,12 +4,12 @@ import { ReactComponent as Img } from './img/Marvel_Logo.svg'
 
 export type LogoProps = {
   size?: 'normal' | 'small'
-  hideOnMobile?: boolean
+  hideonmobile: boolean
 }
 
-const Logo = ({ size = 'normal', hideOnMobile = true }: LogoProps) => {
+const Logo = ({ size = 'normal', hideonmobile = true }: LogoProps) => {
   return (
-    <Wrapper size={size} hideOnMobile={hideOnMobile} to={'/'}>
+    <Wrapper size={size} hideonmobile={hideonmobile} to={'/'}>
       <Img />
       <span className="text">Search heros</span>
     </Wrapper>

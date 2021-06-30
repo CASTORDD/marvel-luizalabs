@@ -23,6 +23,17 @@ export const ButtonWrapper = styled.div<{ className?: string | null }>`
       color: ${theme.colors.black};
       svg {
         fill: ${theme.colors.red};
+      }
+      .heart {
+        fill: ${theme.colors.red};
+        stroke: ${theme.colors.red};
+      }
+    }
+    &.disabled:not(.active) {
+      cursor: not-allowed;
+      display: none;
+      svg {
+        fill: transparent;
 
         .heart {
           stroke: ${theme.colors.red};
