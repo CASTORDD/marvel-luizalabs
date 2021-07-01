@@ -187,7 +187,8 @@ const HerosList = ({ heros, favoritesHeros }: any) => {
               />
             )
           })}
-          <Sorry title="Não tem Heroes favoritos" />
+
+          {!favoritesHeros && <Sorry title="Não tem Heroes favoritos" />}
         </HerosWrapper>
       )}
     </>
